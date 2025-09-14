@@ -43,7 +43,6 @@ class DAO():
         cursor.execute(query)
 
         for row in cursor:
-            print(row)
             result.append(Arco(idMap[row["d1"]], idMap[row["d2"]], row["peso"]))
 
         cursor.close()
