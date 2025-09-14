@@ -66,4 +66,28 @@ class Controller:
         self._view.update_page()
 
     def handleCerca(self, e):
-        pass
+        source = self._model.getObjectFromId(int(self._view._txtIdOggetto.value))
+
+        lun = self._view._ddLun.value
+        if lun is None:
+            self._view.txt_result.controls.clear()
+            self._view.txt_result.controls.append(
+                ft.Text("Attenzione, selezionare un parametro Lunghezza.", color="red"))
+            self._view.update_page()
+            return
+
+        lunInt = int(lun)
+        path, pesoTot = self._model.getOptPath(source, lunInt)
+
+        # ordina il path per cognome
+        path = sorted(path, key=lambda d: d.surname.lower())
+
+        self._view.txt_result.controls.clear()
+        self._view.txt_result.controls.append(ft.Text(
+            f"Cammino che parte da {source} trovato con peso totale {pesoTot}."))
+
+        for p in path:
+            # se p è un Driver, puoi personalizzare la stampa
+            self._view.txt_result.controls.append(ft.Text(f"{p.surname} {p.forename}"))
+
+        self._view.update_page()
