@@ -9,8 +9,16 @@ class Controller:
         self._model = model
 
     def handleAnalizzaOggetti(self, e):
-        pass
+        self._model.buildGraph()
+        self._view.txt_result.controls.append(ft.Text(
+            f"Grafo creato. Il grafo contiene "
+            f"{self._model.getNumNodes()} "
+            f"nodi e {self._model.getNumEdges()} archi."
+        ))
+        self._view._txtIdOggetto.disabled = False
+        self._view._btnCompConnessa.disabled = False
+
+        self._view.update_page()
 
     def handleCompConnessa(self,e):
         pass
-

@@ -1,12 +1,11 @@
 import flet as ft
 
 
-class View(ft.UserControl):
+class View():
     def __init__(self, page: ft.Page):
-        super().__init__()
         # page stuff
         self._page = page
-        self._page.title = "TdP Exercise on MIA Art database"
+        self._page.title = "Simulazione Esame - ArtsMia style"
         self._page.horizontal_alignment = 'CENTER'
         self._page.theme_mode = ft.ThemeMode.LIGHT
         # controller (it is not initialized. Must be initialized in the main, after the controller is created)
@@ -20,7 +19,7 @@ class View(ft.UserControl):
 
     def load_interface(self):
         # title
-        self._title = ft.Text("The MIA Collection database", color="orange", size=24)
+        self._title = ft.Text("Formula 1 - ArtsMia Style", color="orange", size=24)
         self._page.controls.append(self._title)
 
         # controls
@@ -29,10 +28,11 @@ class View(ft.UserControl):
                                                      bgcolor="orange",
                                                      color="white",
                                                      width=200)
-        self._txtIdOggetto = ft.TextField(label="Id Oggetto", color="orange", border_color="orange")
+        self._txtIdOggetto = ft.TextField(label="Id Oggetto", color="orange", border_color="orange", disabled=True)
         self._btnCompConnessa = ft.ElevatedButton(text="Cerca Connessa", on_click=self._controller.handleCompConnessa,
                                                   bgcolor="orange",
                                                   color="white",
+                                                  disabled=True,
                                                   width=200)
 
         self._page.controls.append(ft.Row([self._btnAnalizzaOggetti, self._txtIdOggetto, self._btnCompConnessa],
